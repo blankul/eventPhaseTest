@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #d1 {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      background-color: red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #d2 {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(76, 216, 174);
+    }
+
+    #d3,
+    #d4 {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(50, 32, 218);
+    }
+
+    /* #d3 {
+      position: absolute;
+      left: 350px;
+    } */
+
+    #d4 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: rgb(44, 65, 68);
+      /* z-index: -1; */
+    }
+
+    span.main {
+      color: rgb(255, 72, 0);
+    }
+
+    button {
+      width: 80px;
+      height: 35px;
+      border-radius: 8px;
+      background-color: #1492ff;
+      color: #fff;
+      position: absolute;
+      left: 330px;
+      top: 275px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="d1">
+    <div id="d2">
+      <div id="d3"></div>
+    </div>
+  </div>
+
+
+  <button>clear</button>
+  <div id="d4"></div>
+
+  <p id='text'></p>
+  <script>
+    var d1 = document.getElementById('d1')
+    var d2 = document.getElementById('d2')
+    var d3 = document.getElementById('d3')
+    var text = document.getElementById('text')
+
+    document.querySelector('button').addEventListener('click', function () {
+      text.innerHTML = ''
+    }, false)
+
+    var phases = {
+      1: '捕获阶段',
+      2: '目标阶段',
+      3: '冒泡阶段'
+    };
+    var alias = {
+      d1: 'grandpa',
+      d2: 'father',
+      d3: 'son',
+      d4: 'else'
+    }
+    function fn(e) {
+      console.dir(e)
+      text.innerHTML += `
+        target: <span class="main">${alias[e.target.id]}</span>,
+        currentTarget: <span class="main">${alias[e.currentTarget.id]}</span>, 
+        eventPhase: <span class="main">${phases[e.eventPhase]}</span> <br/><br/>
+        ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓  <br/><br/>
+      `
+    }
+    d1.addEventListener('click', fn, false)
+    d1.addEventListener('click', fn, true)
+    d2.addEventListener('click', fn, false)
+    d2.addEventListener('click', fn, true)
+    d3.addEventListener('click', fn, false)
+    d3.addEventListener('click', fn, true)
+  </script>
+</body>
+
+</html>
